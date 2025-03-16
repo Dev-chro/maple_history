@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メイプルストーリーの黒歴史</title>
+    <style>
+        /* 基本スタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
+        
+        body {
+            background-color: #1E1E1E;
+            color: #E0E0E0;
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23272727" d="M50 30L55 40L65 45L55 50L50 60L45 50L35 45L45 40z"/></svg>');
+            background-size: 150px;
+            background-attachment: fixed;
+        }
+        
+        a {
+            color: #FFA800;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #FF7E00;
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: #341C0B;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="50" viewBox="0 0 300 50"><path fill="%23462810" d="M0 20 C 50 5, 150 50, 300 15 L 300 50 L 0 50 Z"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+            position: relative;
+            border-bottom: 3px solid #FFA800;
+        }
+        
+        .site-title {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #FFC922;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+        }
+        
+        .maple-leaf {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(15, 50, 50)"><circle cx="50" cy="35" r="25" fill="%23FF5555"/><path fill="%23FF5555" d="M25 40 C25 65, 75 65, 75 40 L75 65 C75 85, 25 85, 25 65 Z"/><circle cx="40" cy="30" r="5" fill="%23FFFFFF"/><circle cx="60" cy="30" r="5" fill="%23FFFFFF"/><path fill="none" stroke="%23FFFFFF" stroke-width="2" d="M40 40 C 45 35, 55 35, 60 40"/></g></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .site-description {
+            font-size: 16px;
+            font-weight: normal;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            color: #FFC922;
+        }
+        
+        nav {
+            background-color: rgba(20, 10, 0, 0.7);
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #63430C;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #FFC922;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 4px;
+            background-color: rgba(70, 40, 16, 0.6);
+            border: 1px solid #63430C;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #63430C;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* メインコンテンツとサイドバーのレイアウト */
+        .main-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        main {
+            flex: 1;
+            min-width: 0;
+            flex-basis: 65%;
+        }
+        
+        aside {
+            flex-basis: 30%;
+            min-width: 250px;
+        }
+        
+        /* 記事カード */
+        .article-card {
+            background-color: #2A2A2A;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #444;
+            border-left: 5px solid #FFA800;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23333333" d="M70 0 L100 0 L100 30 C 85 45, 55 15, 70 0 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .article-date {
+            display: inline-block;
+            background-color: #63430C;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .article-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #FFC922;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #444;
+        }
+        
+        .article-content {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .article-evidence {
+            background-color: #1C1C1C;
+            border-left: 4px solid #FF5500;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .article-evidence h3 {
+            color: #FF5500;
+            margin-bottom: 10px;
+        }
+        
+        .article-tag {
+            display: inline-block;
+            background-color: #341C0B;
+            color: #FFC922;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #63430C;
+        }
+        
+        /* サイドバー */
+        .sidebar-widget {
+            background-color: #2A2A2A;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #444;
+        }
+        
+        .sidebar-title {
+            font-size: 20px;
+            color: #FFC922;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #63430C;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-title::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(15, 50, 50)"><circle cx="50" cy="35" r="25" fill="%23FF5555"/><path fill="%23FF5555" d="M25 40 C25 65, 75 65, 75 40 L75 65 C75 85, 25 85, 25 65 Z"/><circle cx="40" cy="30" r="5" fill="%23FFFFFF"/><circle cx="60" cy="30" r="5" fill="%23FFFFFF"/><path fill="none" stroke="%23FFFFFF" stroke-width="2" d="M40 40 C 45 35, 55 35, 60 40"/></g></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .category-list, .timeline-list {
+            list-style: none;
+        }
+        
+        .category-list li, .timeline-list li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .category-list li:last-child, .timeline-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a, .timeline-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        
+        .category-list a:hover, .timeline-list a:hover {
+            transform: translateX(5px);
+        }
+        
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag-cloud a {
+            background-color: #341C0B;
+            color: #FFC922;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: inline-block;
+            border: 1px solid #63430C;
+            transition: all 0.3s;
+        }
+        
+        .tag-cloud a:hover {
+            background-color: #63430C;
+            color: #FFF;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+        
+        /* フッター */
+        footer {
+            background-color: #341C0B;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 3px solid #FFA800;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="50" viewBox="0 0 300 50"><path fill="%23462810" d="M0 0 C 50 15, 150 0, 300 25 L 300 0 L 0 0 Z"/></svg>');
+            background-size: cover;
+            background-position: top;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFC922;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* メイプルらしい装飾要素 */
+        .maple-decoration {
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            bottom: -25px;
+            left: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 100"><path fill="%23FFA800" d="M0 50 Q 200 0, 400 50 Q 600 100, 800 50 L 800 100 L 0 100 Z"/></svg>');
+            background-size: cover;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #FFA800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+        
+        .scroll-top:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        
+        .scroll-top::after {
+            content: "";
+            width: 15px;
+            height: 15px;
+            border-top: 3px solid #341C0B;
+            border-left: 3px solid #341C0B;
+            transform: rotate(45deg) translateY(2px);
+        }
+        
+        /* ゲーム風アイコン */
+        .game-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+            vertical-align: middle;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .icon-bug {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(20, 50, 50)"><circle cx="50" cy="35" r="20" fill="%23A52A2A"/><path fill="%23A52A2A" d="M30 40 C30 60, 70 60, 70 40 L70 60 C70 75, 30 75, 30 60 Z"/><circle cx="40" cy="30" r="4" fill="%23FFFFFF"/><circle cx="60" cy="30" r="4" fill="%23FFFFFF"/><path fill="none" stroke="%23FFFFFF" stroke-width="2" d="M40 45 C 45 40, 55 40, 60 45"/></g></svg>');
+        }
+        
+        .icon-balance {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(20, 50, 50)"><circle cx="50" cy="35" r="20" fill="%2350C878"/><path fill="%2350C878" d="M30 40 C30 60, 70 60, 70 40 L70 60 C70 75, 30 75, 30 60 Z"/><circle cx="40" cy="30" r="4" fill="%23FFFFFF"/><circle cx="60" cy="30" r="4" fill="%23FFFFFF"/><path fill="none" stroke="%23FFFFFF" stroke-width="2" d="M40 45 C 45 40, 55 40, 60 45"/></g></svg>');
+        }
+        
+        .icon-money {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="rotate(20, 50, 50)"><circle cx="50" cy="35" r="20" fill="%23FFD700"/><path fill="%23FFD700" d="M30 40 C30 60, 70 60, 70 40 L70 60 C70 75, 30 75, 30 60 Z"/><circle cx="40" cy="30" r="4" fill="%23FFFFFF"/><circle cx="60" cy="30" r="4" fill="%23FFFFFF"/><path fill="none" stroke="%23FFFFFF" stroke-width="2" d="M40 45 C 45 40, 55 40, 60 45"/><text x="50" y="55" text-anchor="middle" font-size="16" transform="rotate(-20, 50, 55)" fill="%23FFFFFF" font-family="Arial, sans-serif">$</text></g></svg>');
+        }
+        
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .main-wrapper {
+                flex-direction: column;
+            }
+            
+            main, aside {
+                flex-basis: 100%;
+            }
+            
+            .article-card {
+                padding: 20px;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="site-title"><span class="maple-leaf"></span>メイプルストーリーの黒歴史</h1>
+            <p class="site-description">ゲームコミュニティのための信頼性の高い情報源</p>
+            <nav>
+                <ul>
+                    <li><a href="#home">ホーム</a></li>
+                    <li><a href="#issues">重大問題</a></li>
+                    <li><a href="#timeline">年表</a></li>
+                    <li><a href="#evidence">証拠資料</a></li>
+                    <li><a href="#community">コミュニティの声</a></li>
+                    <li><a href="#about">当サイトについて</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="maple-decoration"></div>
+    </header>
+
+    <div class="container main-wrapper">
+        <main>
+            <article class="article-card">
+                <span class="article-date">2004年4月</span>
+                <h2 class="article-title">世界初のゲーム内ガチャシステム導入</h2>
+                <div class="article-content">
+                    <p>日本運営が「ガチャ」システムを世界で初めて実装しました。当初は「ガシャポン」として導入されましたが、商標上の理由で後に「メイポン」に改称されています。</p>
+                    <p>ランダム型の有料アイテム提供は当時画期的でしたが、「射幸心を煽る」として一部で批判も発生。実装直後から高額課金者が現れ、「腐課金者」（課金中毒者）という言葉が生まれるなど社会問題化しかねない様相も呈しました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・当時のサービス運営公式発表</p>
+                    <p>・コミュニティサイトでの記録</p>
+                    <p>・ユーザーブログの証言</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-money"></span>課金システム</span>
+                    <span class="article-tag">ゲーム史</span>
+                    <span class="article-tag">社会問題</span>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <span class="article-date">2008年2月</span>
+                <h2 class="article-title">大規模Duplicationバグと経済崩壊</h2>
+                <div class="article-content">
+                    <p>プレイヤー間取引システムMTS（Maple Trading System）の不具合を突いた「アイテム増殖バグ」が発覚しました。1つのスロットに複数アイテムを重ねて好きなだけ複製できる致命的バグで、モミジサーバーを震源地に高価な強化書や装備が大量増殖されました。</p>
+                    <p>大量の高性能強化済み装備が市場に出回り、相場は崩壊。運営は緊急メンテナンスを実施し、一部ロールバックやアカウント停止措置を取りましたが、公式サイトで詳細を公表せず「増殖アイテムの回収も加害者の処罰も不透明」との批判が残りました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・緊急メンテナンスのお知らせ</p>
+                    <p>・プレイヤーによる増殖現場の証言</p>
+                    <p>・市場価格の急落データ</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-bug"></span>重大バグ</span>
+                    <span class="article-tag">経済崩壊</span>
+                    <span class="article-tag">運営対応問題</span>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <span class="article-date">2010年末</span>
+                <h2 class="article-title">ビッグバンアップデートと古参離れ</h2>
+                <div class="article-content">
+                    <p>全職業スキルやマップ構成、経験値テーブルや戦闘計算式に至るまでゲーム内容を一新する超大型アップデート「ビッグバン」が実施されました。この刷新により低レベル帯のレベリングが大幅容易化し、新規ユーザー獲得には成功したものの、長年のプレイヤーからは「思い出を壊した最悪の改悪」と猛反発を招きました。</p>
+                    <p>日本では環境変化を嫌う古参ユーザーの大量引退を招き、公式掲示板やSNSは「元のメイプルを返して」と炎上状態に。また同時期には潜在能力システムと強化用課金アイテムミラクルキューブが実装されましたが、失敗すれば装備が闇に消える仕様で多くの装備が失われる惨状となりました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・ビッグバンアップデート公式告知</p>
+                    <p>・公式フォーラムの批判投稿</p>
+                    <p>・潜在能力システム導入時の仕様書</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-balance"></span>大型アップデート</span>
+                    <span class="article-tag">コミュニティ炎上</span>
+                    <span class="article-tag">ゲームシステム改変</span>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <span class="article-date">2017年</span>
+                <h2 class="article-title">経験値1024倍バグ事件</h2>
+                <div class="article-content">
+                    <p>経験値2倍イベントが、誤設定により実際には1024倍の経験値倍率になっていたことが判明しました。参加した一部プレイヤーのレベルが瞬時に急上昇する事態となり、例えば通常数時間かかるレベル上げが敵1体倒すだけで達成できる異常事態に。</p>
+                    <p>運営は即座に緊急メンテを行い、不正に獲得された経験値を全てリセット（無効化）する対応を実施。ロールバックまでは不要だったものの、巻き込まれたプレイヤーには経験値補填もなく、「巻き戻された」「時間を返してほしい」といった不満の声が出ました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・運営による謝罪告知</p>
+                    <p>・プレイヤーのSNS投稿（経験値異常値のスクリーンショット）</p>
+                    <p>・補填対応の公式発表</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-bug"></span>経験値バグ</span>
+                    <span class="article-tag">イベント不具合</span>
+                    <span class="article-tag">緊急対応</span>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <span class="article-date">2021年2月</span>
+                <h2 class="article-title">確率不正発覚と大炎上</h2>
+                <div class="article-content">
+                    <p>韓国版メイプルストーリーにて「転生の炎」の確率不正事件が発覚。装備にランダムオプションを付与するアイテム「転生の炎」について、本来「完全なランダム」と説明されていたにもかかわらず実際には特定オプション出現率に偏りがあることが判明しました。</p>
+                    <p>この情報は瞬く間に日本も含む各国コミュニティで拡散し、大規模炎上に発展。運営は詳細確率を公開する対応を余儀なくされ、全プレイヤーに確率開示された強化関連アイテムを配布するなど補償も実施。運営プロデューサーは生放送で頭を下げる事態となりました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・韓国版運営の謝罪文</p>
+                    <p>・日本版運営の対応告知</p>
+                    <p>・運営生放送アーカイブ</p>
+                    <p>・確率データの公開情報</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-money"></span>確率操作</span>
+                    <span class="article-tag">運営不信</span>
+                    <span class="article-tag">情報開示</span>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <span class="article-date">2023年1月</span>
+                <h2 class="article-title">天文学的経験値バグ再び</h2>
+                <div class="article-content">
+                    <p>高Lv向けコンテンツ「モンスターパークエクストリーム」にて天文学的経験値バグが発生。本来なら一定量のEXPを得られる設計だったが、何らかの不具合で獲得EXPがさらに桁違いに増幅され、一部プレイヤーが"800京"もの経験値を取得してしまいました。</p>
+                    <p>運営は事態を重く見て緊急メンテを実施し、過剰に得た経験値を全て回収する処置を取りましたが、先に韓国版でも同様の不具合が発生していたにもかかわらず日本での再発を防げなかったことへの批判や、韓国と比較して「日本は補償が渋い」という不満の声が上がりました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・経験値バグ緊急メンテナンスのお知らせ</p>
+                    <p>・補償内容の公式発表</p>
+                    <p>・SNSでの批判投稿</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-bug"></span>経験値バグ</span>
+                    <span class="article-tag">再発問題</span>
+                    <span class="article-tag">補償格差</span>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <span class="article-date">2024年</span>
+                <h2 class="article-title">ジェネパン問題と運営不信のピーク</h2>
+                <div class="article-content">
+                    <p>20周年目前のこの年、「ジェネパン」問題がコミュニティで大きく取り沙汰されました。ジェネシス武器に武公パンダの魂を付与する強化仕様が日本と中国にのみ存在し、成功率は低いのに失敗すると武器消滅・保護不可という苛烈さから、「世界最悪の強化システム」とまで酷評されました。</p>
+                    <p>トップ層ユーザーの間では以前から問題視されていましたが、20周年を機に一般層にも認知が広まりブログやSNSで拡散。「#ジェネパン許すな」のハッシュタグが登場し、メイプル流行語大賞2024にノミネートされるほど話題になる一方、運営の対応の遅さに不信感が頂点に達しました。</p>
+                </div>
+                <div class="article-evidence">
+                    <h3>証拠：</h3>
+                    <p>・ジェネパン強化仕様の公式説明</p>
+                    <p>・他国版との仕様比較</p>
+                    <p>・運営の「仕様再検討中」声明</p>
+                    <p>・SNSでの批判ハッシュタグ投稿</p>
+                </div>
+                <div>
+                    <span class="article-tag"><span class="game-icon icon-balance"></span>強化システム問題</span>
+                    <span class="article-tag">日本版特有問題</span>
+                    <span class="article-tag">ユーザー反発</span>
+                </div>
+            </article>
+        </main>
+
+        <aside>
+            <div class="sidebar-widget">
+                <h3 class="sidebar-title">カテゴリー</h3>
+                <ul class="category-list">
+                    <li><a href="#">重大バグ <span>28</span></a></li>
+                    <li><a href="#">バランス調整 <span>15</span></a></li>
+                    <li><a href="#">課金関連問題 <span>22</span></a></li>
+                    <li><a href="#">確率操作 <span>7</span></a></li>
+                    <li><a href="#">運営対応問題 <span>19</span></a></li>
+                    <li><a href="#">経済崩壊 <span>9</span></a></li>
+                    <li><a href="#">アカウント関連 <span>10</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="sidebar-title">年表</h3>
+                <ul class="timeline-list">
+                    <li><a href="#">2020年代 <span>18</span></a></li>
+                    <li><a href="#">2010年代 <span>31</span></a></li>
+                    <li><a href="#">2000年代 <span>26</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="sidebar-title">タグクラウド</h3>
+                <div class="tag-cloud">
+                    <a href="#">アイテム増殖</a>
+                    <a href="#">バランス調整</a>
+                    <a href="#">確率操作</a>
+                    <a href="#">経験値バグ</a>
+                    <a href="#">ロールバック</a>
+                    <a href="#">ビッグバン</a>
+                    <a href="#">ジェネパン</a>
+                    <a href="#">緊急メンテ</a>
+                    <a href="#">補償問題</a>
+                    <a href="#">古参離れ</a>
+                    <a href="#">ガチャ</a>
+                    <a href="#">運営不信</a>
+                    <a href="#">メイポン</a>
+                    <a href="#">潜在能力</a>
+                    <a href="#">転生の炎</a>
+                </div>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="sidebar-title">最新情報</h3>
+                <p>当サイトでは2003年から2025年までのメイプルストーリー運営の問題を時系列でまとめています。情報提供や修正依頼は以下からお寄せください。</p>
+                <p>最終更新日: 2025年3月16日</p>
+                <a href="#contact">情報提供はこちら →</a>
+            </div>
+        </aside>
+    </div>
+
+    <div class="scroll-top"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">当サイトについて</h3>
+                    <p>このサイトはメイプルストーリーのプレイヤーコミュニティによって運営されています。より良いゲーム環境の実現を目指して問題点を客観的に記録しています。</p>
+                    <p>このサイトは株式会社ネクソンとは一切関係ありません。</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">免責事項</h3>
+                    <p>当サイトの情報は可能な限り正確性を期していますが、完全性を保証するものではありません。情報の利用は自己責任でお願いします。</p>
+                    <p>記載されている会社名・製品名・システム名などは、各社の商標または登録商標です。</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">お問い合わせ</h3>
+                    <p>情報提供や修正依頼は以下のアドレスにご連絡ください。</p>
+                    <p>Email: info@maple-community-record.example.com</p>
+                    <p>※運営会社への直接の問い合わせは公式サイトからお願いします。</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 メイプルストーリーの黒歴史. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
